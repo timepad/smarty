@@ -678,6 +678,29 @@ class Smarty extends Smarty_Internal_TemplateBase {
     }
 
     /**
+     * @param $name
+     * @return mixed
+     * @throws SmartyException
+     */
+    public function __isset($name)
+    {
+        $allowed = array(
+            'template_dir' => 'getTemplateDir',
+            'config_dir' => 'getConfigDir',
+            'plugins_dir' => 'getPluginsDir',
+            'compile_dir' => 'getCompileDir',
+            'cache_dir' => 'getCacheDir',
+        );
+
+        if (isset($allowed[$name])) {
+            return true;
+        }
+
+        // Специально не делаем совместимость с PHP-7 (см метод __get)
+        trigger_error('Undefined property: '. get_class($this) .'::$'. $name, E_USER_NOTICE);
+    }
+
+    /**
      * <<magic>> Generic setter.
      *
      * Calls the appropriate setter function.

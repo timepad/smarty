@@ -90,6 +90,15 @@ class Smarty_Config_Source extends Smarty_Template_Source {
         }
     }
 
+    /**
+     * @param $property_name
+     * @return bool
+     */
+    public function __isset($property_name)
+    {
+        return in_array($property_name, ['timestamp', 'exists', 'content']);
+    }
+
 }
 
 ?>

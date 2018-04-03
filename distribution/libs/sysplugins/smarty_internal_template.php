@@ -682,6 +682,16 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     }
 
     /**
+     * @param $property_name
+     * @return bool
+     */
+    public function __isset($property_name)
+    {
+        return in_array($property_name, ['source', 'compiled', 'cached', 'compiler']) || property_exists($this->smarty, $property_name);
+    }
+
+
+    /**
      * Template data object destrutor
      *
      */
